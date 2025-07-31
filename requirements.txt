@@ -1,0 +1,58 @@
+# Dependencies for the dora_voice_dialogue project
+# This file lists all Python packages required by the dora nodes.
+
+# Dora-specific dependencies
+dora-rs-cli
+pyarrow
+
+# Core dependencies from original VoiceDialogue project
+langchain==0.2.17
+langchain-community==0.2.17
+numpy==1.26.4 # Specific version from original uv.lock/requirements
+pyaudio==0.2.14
+soundfile==0.13.1
+playsound==1.2.2
+cn2an==0.5.23
+einops==0.8.1
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+fastapi==0.115.12
+ffmpeg-python==0.2.0
+funasr-onnx==0.4.1
+g2p-en==2.1.0
+huggingface-hub==0.32.4
+jieba==0.42.1
+jieba-fast==0.53
+langsegment @ git+https://github.com/ishine/LangSegment.git
+librosa==0.11.0
+llama-cpp-python==0.3.9
+loguru
+
+# misaki[en]
+misaki==0.9.4
+addict==2.4.0
+regex==2024.11.6
+espeakng-loader==0.2.4
+num2words==0.5.14
+phonemizer==3.3.0
+spacy==3.8.7
+spacy-curated-transformers==0.3.1
+
+opencc==1.1.9
+pyobjc-framework-avfoundation==11.0
+pypinyin==0.54.0
+pytorch-lightning==2.3.1
+pywhispercpp @ git+https://github.com/absadiki/pywhispercpp.git
+silero-vad==5.1.2
+torch==2.3.1
+transformers==4.41.2
+uvicorn==0.34.3
+websockets==15.0.1
+wordsegment==1.3.1
+
+
+# Other potential dependencies from original project (add as needed based on specific features used)
+# uv # If you want to manage dependencies with uv
+# onnxruntime # If using ONNX models directly
+# torch # If using PyTorch models
+# transformers # If using HuggingFace transformers
+# ... (check original requirements.txt and pyproject.toml for other specific packages)

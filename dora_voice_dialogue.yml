@@ -1,0 +1,53 @@
+# dora_voice_dialogue.yml
+# The new dataflow architecture for our application
+
+nodes:
+  # 1. Audio Capture Node: Captures audio and VAD state from the microphone.
+  - id: audio_capture
+    path: ./nodes/audio_capture_node.py
+    inputs:
+      tick: dora/timer/millis/100 # Capture audio every 100ms
+    outputs:
+      - audio_chunk
+
+  # 2. Speech State Monitor Node: Buffers audio when the user is speaking.
+  - id: speech_state_monitor
+    path: ./nodes/speech_state_monitor_node.py
+    inputs:
+      audio_chunk: audio_capture/audio_chunk
+    outputs:
+      - voice_utterance
+
+  # 3. ASR Node: Transcribes a complete voice utterance into text.
+  - id: asr_worker
+    path: ./nodes/asr_node.py
+    inputs:
+      voice_utterance: speech_state_monitor/voice_utterance
+    outputs:
+      - transcribed_text
+    env:
+      ASR_LANGUAGE: "en" # Default ASR language
+
+  # 4. LLM Node: Generates a response based on the transcribed text.
+  - id: llm_generator
+    path: ./nodes/llm_node.py
+    inputs:
+      user_question: asr_worker/transcribed_text
+    outputs:
+      - llm_response
+
+  # 5. TTS Node: Converts the LLM's text response into speech.
+  - id: tts_generator
+    path: ./nodes/tts_node.py
+    inputs:
+      text_to_synthesize: llm_generator/llm_response
+    outputs:
+      - synthesized_audio
+    env:
+      TTS_SPEAKER: "kokoro" # Default TTS speaker
+
+  # 6. Audio Player Node: Plays the synthesized audio.
+  - id: audio_player
+    path: ./nodes/audio_player_node.py
+    inputs:
+      audio_to_play: tts_generator/synthesized_audio

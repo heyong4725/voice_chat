@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div class="mermaid">
+        flowchart TB
+  asr_worker["**asr_worker**"]
+  audio_capture["**audio_capture**"]
+  audio_player[/"**audio_player**"\]
+  llm_generator["**llm_generator**"]
+  speech_state_monitor["**speech_state_monitor**"]
+  tts_generator["**tts_generator**"]
+subgraph ___dora___ [dora]
+  subgraph ___timer_timer___ [timer]
+    dora/timer/millis/100[\millis/100/]
+  end
+end
+  speech_state_monitor -- voice_utterance --> asr_worker
+  dora/timer/millis/100 -- tick --> audio_capture
+  tts_generator -- synthesized_audio as audio_to_play --> audio_player
+  asr_worker -- transcribed_text as user_question --> llm_generator
+  audio_capture -- audio_chunk --> speech_state_monitor
+  llm_generator -- llm_response as text_to_synthesize --> tts_generator
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'base' });
+    </script>
+</body>
+
+</html>
