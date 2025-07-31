@@ -3,10 +3,10 @@ from dora import Node, DoraStatus
 import unicodedata
 
 # Import necessary components from the original project and langchain
-from voice_dialogue.config import paths
-from voice_dialogue.config.llm_config import get_llm_model_params
-from voice_dialogue.config.user_config import get_prompt
-from voice_dialogue.services.text.processor import (
+from llm_lib import paths
+from llm_lib.llm_config import get_llm_model_params
+from llm_lib.user_config import get_prompt
+from llm_lib.processor import (
     preprocess_sentence_text, create_langchain_chat_llamacpp_instance,
     create_langchain_pipeline, warmup_langchain_pipeline
 )

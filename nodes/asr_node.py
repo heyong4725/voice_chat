@@ -2,11 +2,11 @@ import numpy as np
 import pyarrow as pa
 from dora import Node, DoraStatus
 
-# We will need to import the ASR manager from the original project.
-# This assumes that the `src` directory is in the Python path.
-# In a real-world refactoring, we might move these shared utilities
-# into a common library.
-from voice_dialogue.services.speech.recognizers import asr_manager
+from asr_manager import asr_manager
+
+
+
+
 
 class ASRNode:
     """
@@ -18,7 +18,7 @@ class ASRNode:
         # This could be configured via environment variables in the YAML.
         import os
         asr_language = os.environ.get("ASR_LANGUAGE", "en") # Default to 'en' if not set
-        self.asr_client = asr_manager.create_asr(asr_language)
+        self.asr_client = asr_manager.get_or_create_asr(asr_language)
         print(f"ASR client initialized with language: {asr_language}")
         self.asr_client.setup()
         self.asr_client.warmup()

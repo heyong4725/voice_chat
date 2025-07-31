@@ -2,8 +2,8 @@ import pyarrow as pa
 from dora import Node, DoraStatus
 
 # Import necessary components from the original project
-from voice_dialogue.services.audio.generators import tts_manager
-from voice_dialogue.config.speaker_config import get_tts_config_by_speaker_name
+from tts_manager import tts_manager
+from speaker_config import get_tts_config_by_speaker_name
 
 class TTSNode:
     """
